@@ -41,6 +41,11 @@ void AHPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	{
 		EIC->BindAction(Input_Look, ETriggerEvent::Triggered, this, &AHPlayerCharacter::HandleLook);
 	}
+
+	if (ensure(Input_Jump))
+	{
+		EIC->BindAction(Input_Jump, ETriggerEvent::Triggered, this, &AHPlayerCharacter::HandleJump);
+	}
 }
 
 void AHPlayerCharacter::HandleMove(const FInputActionInstance& ActionInstance)
@@ -63,4 +68,9 @@ void AHPlayerCharacter::HandleLook(const FInputActionValue& ActionValue)
 	const FVector2D Value = ActionValue.Get<FVector2D>();
 	AddControllerYawInput(Value.X);
 	AddControllerPitchInput(Value.Y);
+}
+
+void AHPlayerCharacter::HandleJump()
+{
+	Jump();
 }

@@ -32,11 +32,16 @@ protected:
 private:
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UInputAction> Input_Move;
-	
+
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UInputAction> Input_Look;
-	
+
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UInputAction> Input_Jump;
+
 	void HandleMove(const FInputActionInstance& ActionInstance);
-	
+
 	void HandleLook(const FInputActionValue& ActionValue);
+
+	void HandleJump();
 };
