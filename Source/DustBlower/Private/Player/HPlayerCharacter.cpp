@@ -4,6 +4,8 @@
 #include "DustBlower/Public/Player/HPlayerCharacter.h"
 
 #include "EnhancedInputComponent.h"
+#include "GameplayTagContainer.h"
+#include "HSprintComponent.h"
 
 
 // Sets default values
@@ -46,6 +48,11 @@ void AHPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	{
 		EIC->BindAction(Input_Jump, ETriggerEvent::Triggered, this, &AHPlayerCharacter::HandleJump);
 	}
+
+	if (ensure(Input_Sprint))
+	{
+		EIC->BindAction(Input_Sprint, ETriggerEvent::Started, this, &AHPlayerCharacter::HandleSprint);
+	}
 }
 
 void AHPlayerCharacter::HandleMove(const FInputActionInstance& ActionInstance)
@@ -73,4 +80,29 @@ void AHPlayerCharacter::HandleLook(const FInputActionValue& ActionValue)
 void AHPlayerCharacter::HandleJump()
 {
 	Jump();
+}
+
+void AHPlayerCharacter::HandleSprint()
+{
+	UHSprintComponent* SprintComponent = GetComponentByClass<UHSprintComponent>();
+	if (!IsValid(SprintComponent))
+	{
+		return;
+	}
+
+	SprintComponent->ToggleSprint();
+}
+
+bool AHPlayerCharacter::IsMovingBackward()
+{
+	const FVector Velocity = GetVelocity();
+
+	if (Velocity.IsNearlyZero())
+	{
+		return false;
+	}
+
+	const float DotProduct = FVector::DotProduct(GetActorForwardVector(), Velocity.GetSafeNormal());
+
+	return DotProduct < 0.0f;
 }
