@@ -53,6 +53,11 @@ void AHPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	{
 		EIC->BindAction(Input_Sprint, ETriggerEvent::Started, this, &AHPlayerCharacter::HandleSprint);
 	}
+
+	if (ensure(Input_Crouch))
+	{
+		EIC->BindAction(Input_Crouch, ETriggerEvent::Started, this, &AHPlayerCharacter::HandleCrouch);
+	}
 }
 
 void AHPlayerCharacter::HandleMove(const FInputActionInstance& ActionInstance)
@@ -91,6 +96,17 @@ void AHPlayerCharacter::HandleSprint()
 	}
 
 	SprintComponent->ToggleSprint();
+}
+
+void AHPlayerCharacter::HandleCrouch()
+{
+	if (!bIsCrouched)
+	{
+		Crouch();
+		return;
+	}
+
+	UnCrouch();
 }
 
 bool AHPlayerCharacter::IsMovingBackward()

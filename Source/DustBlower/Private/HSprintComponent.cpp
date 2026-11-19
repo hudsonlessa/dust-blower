@@ -56,7 +56,7 @@ bool UHSprintComponent::CanSprint()
 		return false;
 	}
 
-	if (Owner->IsMovingBackward())
+	if (Owner->IsMovingBackward() || Owner->IsCrouched())
 	{
 		return false;
 	}

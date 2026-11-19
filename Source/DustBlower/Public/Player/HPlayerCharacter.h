@@ -45,6 +45,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UInputAction> Input_Sprint;
 
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UInputAction> Input_Crouch;
+
 	FGameplayTagContainer Tags;
 
 	void HandleMove(const FInputActionInstance& ActionInstance);
@@ -54,4 +57,6 @@ private:
 	void HandleJump();
 
 	void HandleSprint();
+
+	void HandleCrouch();
 };
