@@ -26,7 +26,13 @@ void UHSprintComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+	UCharacterMovementComponent* CMC = GetOwnerCharacterMovementComponent();
+	if (!IsValid(CMC))
+	{
+		return;
+	}
+
+	DefaultSpeed = CMC->MaxWalkSpeed;
 }
 
 
@@ -94,7 +100,6 @@ void UHSprintComponent::StartSprint()
 		return;
 	}
 
-	DefaultSpeed = CMC->MaxWalkSpeed;
 	CMC->MaxWalkSpeed = SprintSpeed;
 
 	StateManagerComponent->ActivateState(State_Movement_Sprinting);
