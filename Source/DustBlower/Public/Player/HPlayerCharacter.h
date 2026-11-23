@@ -3,7 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameplayTagContainer.h"
 #include "GameFramework/Character.h"
 #include "HPlayerCharacter.generated.h"
 
@@ -26,8 +25,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	bool IsMovingBackward();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -47,8 +44,6 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	TObjectPtr<UInputAction> Input_Crouch;
-
-	FGameplayTagContainer Tags;
 
 	void HandleMove(const FInputActionInstance& ActionInstance);
 

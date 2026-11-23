@@ -4,8 +4,8 @@
 #include "DustBlower/Public/Player/HPlayerCharacter.h"
 
 #include "EnhancedInputComponent.h"
-#include "GameplayTagContainer.h"
-#include "HSprintComponent.h"
+#include "HGameplayTags.h"
+#include "ActionCommandSystem/HActionCommandSystemComponent.h"
 
 
 // Sets default values
@@ -69,6 +69,12 @@ void AHPlayerCharacter::HandleMove(const FInputActionInstance& ActionInstance)
 	const FInputActionValue ActionValue = ActionInstance.GetValue();
 	const FVector2D AxisValue = ActionValue.Get<FVector2D>();
 
+	UHActionCommandSystemComponent* ACSC = GetComponentByClass<UHActionCommandSystemComponent>();
+	if (IsValid(ACSC) && AxisValue.X < 0.0f)
+	{
+		ACSC->UndoActionCommand(Command_Action_Movement_Sprint);
+	}
+
 	AddMovementInput(ControlRotation.Vector(), AxisValue.X);
 
 	const FVector RightVector = ControlRotation.RotateVector(FVector::RightVector);
@@ -89,13 +95,13 @@ void AHPlayerCharacter::HandleJump()
 
 void AHPlayerCharacter::HandleSprint()
 {
-	UHSprintComponent* SprintComponent = GetComponentByClass<UHSprintComponent>();
-	if (!IsValid(SprintComponent))
+	UHActionCommandSystemComponent* ACSC = GetComponentByClass<UHActionCommandSystemComponent>();
+	if (!IsValid(ACSC))
 	{
 		return;
 	}
 
-	SprintComponent->ToggleSprint();
+	ACSC->ExecuteActionCommand(Command_Action_Movement_Sprint);
 }
 
 void AHPlayerCharacter::HandleCrouch()
@@ -107,18 +113,4 @@ void AHPlayerCharacter::HandleCrouch()
 	}
 
 	UnCrouch();
-}
-
-bool AHPlayerCharacter::IsMovingBackward()
-{
-	const FVector Velocity = GetVelocity();
-
-	if (Velocity.IsNearlyZero())
-	{
-		return false;
-	}
-
-	const float DotProduct = FVector::DotProduct(GetActorForwardVector(), Velocity.GetSafeNormal());
-
-	return DotProduct < 0.0f;
 }
