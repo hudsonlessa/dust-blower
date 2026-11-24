@@ -8,6 +8,8 @@
 
 void UHSprintActionCommand::Execute(AActor* Instigator)
 {
+	Super::Execute(Instigator);
+
 	if (!IsValid(Instigator))
 	{
 		return;
@@ -21,14 +23,6 @@ void UHSprintActionCommand::Execute(AActor* Instigator)
 
 	DefaultSpeed = CMC->MaxWalkSpeed;
 	CMC->MaxWalkSpeed = SprintSpeed;
-
-	if (!GEngine)
-	{
-		return;
-	}
-
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White,
-	                                 FString::Printf(TEXT("Executed action %s"), *ActionCommandTag.ToString()));
 }
 
 void UHSprintActionCommand::Undo()
@@ -40,11 +34,5 @@ void UHSprintActionCommand::Undo()
 
 	CMC->MaxWalkSpeed = DefaultSpeed;
 
-	if (!GEngine)
-	{
-		return;
-	}
-
-	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::White,
-	                                 FString::Printf(TEXT("Undone action %s"), *ActionCommandTag.ToString()));
+	Super::Undo();
 }

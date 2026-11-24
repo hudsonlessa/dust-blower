@@ -33,9 +33,9 @@ public:
 		return bIsPersistent;
 	}
 
-	virtual void Execute(AActor* Instigator) PURE_VIRTUAL(UHActionCommand::Execute);
+	virtual void Execute(AActor* Instigator);
 
-	virtual void Undo() PURE_VIRTUAL(UHActionCommand::Undo);
+	virtual void Undo();
 
 protected:
 	UPROPERTY(EditDefaultsOnly)
