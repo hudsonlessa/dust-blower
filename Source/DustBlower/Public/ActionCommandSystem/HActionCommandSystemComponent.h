@@ -16,13 +16,6 @@ class DUSTBLOWER_API UHActionCommandSystemComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this component's properties
-	UHActionCommandSystemComponent();
-
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-	                           FActorComponentTickFunction* ThisTickFunction) override;
-
 	void ExecuteActionCommand(FGameplayTag ActionCommandTag);
 
 	void UndoActionCommand(FGameplayTag ActionCommandTag);
@@ -42,6 +35,6 @@ private:
 	FGameplayTagContainer PersistentActionCommandsTags;
 
 	UHActionCommand* FindActionCommand(FGameplayTag ActionCommandTag, TArray<UHActionCommand*> ActionCommands);
-	
+
 	void UndoActionCommands(FGameplayTagContainer ActionCommandTags);
 };
