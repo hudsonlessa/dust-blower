@@ -4,13 +4,19 @@
 
 #include "CoreMinimal.h"
 #include "HActionCommand.h"
-#include "HJumpActionCommand.generated.h"
+#include "HActionCommand_Crouch.generated.h"
 
 UCLASS(Abstract, Blueprintable)
-class DUSTBLOWER_API UHJumpActionCommand : public UHActionCommand
+class DUSTBLOWER_API UHActionCommand_Crouch : public UHActionCommand
 {
 	GENERATED_BODY()
 
 public:
 	virtual void Execute(AActor* Instigator) override;
+
+	virtual void Undo() override;
+
+private:
+	UPROPERTY()
+	TObjectPtr<ACharacter> CachedInstigatorCharacter;
 };

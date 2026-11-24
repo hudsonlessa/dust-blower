@@ -1,12 +1,12 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "ActionCommandSystem/HSprintActionCommand.h"
+#include "ActionCommandSystem/HActionCommand_Sprint.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 
 
-void UHSprintActionCommand::Execute(AActor* Instigator)
+void UHActionCommand_Sprint::Execute(AActor* Instigator)
 {
 	Super::Execute(Instigator);
 
@@ -25,7 +25,7 @@ void UHSprintActionCommand::Execute(AActor* Instigator)
 	CMC->MaxWalkSpeed = SprintSpeed;
 }
 
-void UHSprintActionCommand::Undo()
+void UHActionCommand_Sprint::Undo()
 {
 	if (!IsValid(CMC))
 	{

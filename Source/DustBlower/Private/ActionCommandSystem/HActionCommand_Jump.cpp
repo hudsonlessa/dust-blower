@@ -1,12 +1,12 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "ActionCommandSystem/HJumpActionCommand.h"
+#include "ActionCommandSystem/HActionCommand_Jump.h"
 
 #include "GameFramework/Character.h"
 
 
-void UHJumpActionCommand::Execute(AActor* Instigator)
+void UHActionCommand_Jump::Execute(AActor* Instigator)
 {
 	Super::Execute(Instigator);
 

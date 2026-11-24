@@ -1,12 +1,12 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "ActionCommandSystem/HCrouchActionCommand.h"
+#include "ActionCommandSystem/HActionCommand_Crouch.h"
 
 #include "GameFramework/Character.h"
 
 
-void UHCrouchActionCommand::Execute(AActor* Instigator)
+void UHActionCommand_Crouch::Execute(AActor* Instigator)
 {
 	Super::Execute(Instigator);
 
@@ -24,7 +24,7 @@ void UHCrouchActionCommand::Execute(AActor* Instigator)
 	CachedInstigatorCharacter->Crouch();
 }
 
-void UHCrouchActionCommand::Undo()
+void UHActionCommand_Crouch::Undo()
 {
 	if (!IsValid(CachedInstigatorCharacter))
 	{

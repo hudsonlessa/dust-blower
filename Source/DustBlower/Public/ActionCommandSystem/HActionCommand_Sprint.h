@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "HActionCommand.h"
-#include "HSprintActionCommand.generated.h"
+#include "HActionCommand_Sprint.generated.h"
 
 class UCharacterMovementComponent;
 
 UCLASS(Abstract, Blueprintable)
-class DUSTBLOWER_API UHSprintActionCommand : public UHActionCommand
+class DUSTBLOWER_API UHActionCommand_Sprint : public UHActionCommand
 {
 	GENERATED_BODY()
 
