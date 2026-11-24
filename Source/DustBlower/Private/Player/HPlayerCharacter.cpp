@@ -71,7 +71,13 @@ void AHPlayerCharacter::HandleLook(const FInputActionValue& ActionValue)
 
 void AHPlayerCharacter::HandleJump()
 {
-	Jump();
+	UHActionCommandSystemComponent* ACSC = GetComponentByClass<UHActionCommandSystemComponent>();
+	if (!IsValid(ACSC))
+	{
+		return;
+	}
+
+	ACSC->ExecuteActionCommand(Command_Action_Movement_Jump);
 }
 
 void AHPlayerCharacter::HandleSprint()
