@@ -33,6 +33,8 @@ void UHActionCommandSystemComponent::ExecuteActionCommand(FGameplayTag ActionCom
 		return;
 	}
 
+	UndoActionCommands(ActionCommand->GetUndoActionCommandsWithTags());
+
 	ActionCommand->Execute(GetOwner());
 
 	if (!ActionCommand->GetIsPersistent())
