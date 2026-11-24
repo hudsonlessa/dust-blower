@@ -87,11 +87,11 @@ void AHPlayerCharacter::HandleSprint()
 
 void AHPlayerCharacter::HandleCrouch()
 {
-	if (!bIsCrouched)
+	UHActionCommandSystemComponent* ACSC = GetComponentByClass<UHActionCommandSystemComponent>();
+	if (!IsValid(ACSC))
 	{
-		Crouch();
 		return;
 	}
 
-	UnCrouch();
+	ACSC->ExecuteActionCommand(Command_Action_Movement_Crouch);
 }
